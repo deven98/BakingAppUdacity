@@ -17,9 +17,18 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
     private Context mContext;
 
-    public RecipeListAdapter(Context mContext){
+    ItemClickListener itemClickListener;
+
+    public RecipeListAdapter(Context mContext, ItemClickListener itemClickListener){
 
         this.mContext = mContext;
+        this.itemClickListener = itemClickListener;
+
+    }
+
+    interface ItemClickListener{
+
+        public void onItemClick(int position);
 
     }
 
@@ -40,7 +49,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         return NetworkUtils.RECIPE_NAMES.size();
     }
 
-    public class RecipeViewHolder extends RecyclerView.ViewHolder{
+    public class RecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView recipeName;
 
@@ -50,6 +59,8 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
             recipeName = (TextView) itemView.findViewById(R.id.recipe_list_item_text_view);
 
+            itemView.setOnClickListener(this);
+
         }
 
         void bind(int position){
@@ -58,6 +69,12 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
         }
 
+        @Override
+        public void onClick(View v) {
+
+            itemClickListener.onItemClick(getAdapterPosition());
+
+        }
     }
 
 }

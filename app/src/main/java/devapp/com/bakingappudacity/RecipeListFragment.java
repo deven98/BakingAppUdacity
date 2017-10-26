@@ -1,5 +1,6 @@
 package devapp.com.bakingappudacity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -31,7 +32,16 @@ public class RecipeListFragment extends Fragment {
 
         RecyclerView recipeListRecyclerView = (RecyclerView) v.findViewById(R.id.recipe_list_recycler_view);
 
-        recipeListAdapter = new RecipeListAdapter(getContext());
+        recipeListAdapter = new RecipeListAdapter(getContext(), new RecipeListAdapter.ItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+                //TODO: Add logic for master detail flow later
+
+
+
+            }
+        });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
 
