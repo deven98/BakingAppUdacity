@@ -1,5 +1,6 @@
 package devapp.com.bakingappudacity;
 
+import android.annotation.SuppressLint;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
@@ -13,8 +14,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     public static int FRAGMENT_LIST_LOADER_ID = 101;
 
-    RecipeListAdapter recipeListAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     @Override
     public Loader<Void> onCreateLoader(int id, Bundle args) {
         return new AsyncTaskLoader<Void>(this) {
@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             @Override
             protected void onStartLoading() {
                 super.onStartLoading();
+
+                if(NetworkUtils.result.matches(""))
                 forceLoad();
             }
 

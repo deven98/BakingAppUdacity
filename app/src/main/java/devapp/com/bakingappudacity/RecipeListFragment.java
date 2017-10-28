@@ -36,10 +36,9 @@ public class RecipeListFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
 
-                //TODO: Add logic for master detail flow later
-
-
-
+                Intent in = new Intent(getContext(),RecipeDetailActivity.class);
+                in.putExtra("position",position);
+                startActivity(in);
             }
         });
 

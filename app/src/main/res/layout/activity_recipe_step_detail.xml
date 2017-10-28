@@ -6,4 +6,10 @@
     android:layout_height="match_parent"
     tools:context="devapp.com.bakingappudacity.RecipeStepDetailActivity">
 
+    <fragment
+        android:id="@+id/recipe_step_detail_fragment"
+        android:name="devapp.com.bakingappudacity.RecipeStepDetailFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </android.support.constraint.ConstraintLayout>

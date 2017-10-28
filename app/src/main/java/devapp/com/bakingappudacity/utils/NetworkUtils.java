@@ -1,6 +1,7 @@
 package devapp.com.bakingappudacity.utils;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -28,6 +29,8 @@ public class NetworkUtils {
 
     public static String result = "";
 
+    public static int STEP_CHOSEN = 0;
+
     public static void getRecipesNames(){
 
         RECIPE_NAMES.clear();
@@ -47,6 +50,52 @@ public class NetworkUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+    }
+
+    public static void getRecipeDetails(int position){
+
+        try {
+            JSONArray resultArray = new JSONArray(result);
+
+            JSONObject selectedRecipe = resultArray.getJSONObject(position);
+
+            JSONArray ingredients = selectedRecipe.getJSONArray("ingredients");
+            JSONArray steps = selectedRecipe.getJSONArray("steps");
+
+            for(int i=0; i<ingredients.length(); i++){
+
+                INGREDIENTS_QUANTITY.add(ingredients.getJSONObject(i).getString("quantity"));
+                INGREDIENTS_MEASURE.add(ingredients.getJSONObject(i).getString("measure"));
+                INGREDIENTS_NAME.add(ingredients.getJSONObject(i).getString("ingredient"));
+
+            }
+
+            for(int i =0; i<steps.length(); i++){
+
+                STEP_SHORT_DESCRIPTION.add(steps.getJSONObject(i).getString("shortDescription"));
+                STEP_DESCRIPTION.add(steps.getJSONObject(i).getString("description"));
+                STEP_VIDEO_URL.add(steps.getJSONObject(i).getString("videoURL"));
+                STEP_THUMBNAIL_URL.add(steps.getJSONObject(i).getString("thumbnailURL"));
+
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void clearRecipeDetails(){
+
+        INGREDIENTS_NAME.clear();
+        INGREDIENTS_MEASURE.clear();
+        INGREDIENTS_QUANTITY.clear();
+
+        STEP_SHORT_DESCRIPTION.clear();
+        STEP_THUMBNAIL_URL.clear();
+        STEP_VIDEO_URL.clear();
+        STEP_DESCRIPTION.clear();
 
     }
 
