@@ -11,6 +11,7 @@
         android:layout_height="187dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,19 +21,6 @@
         app:layout_constraintVertical_bias="0.0">
 
     </com.google.android.exoplayer2.ui.SimpleExoPlayerView>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recipe_step_detail_fragment_recycler_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recipe_step_detail_fragment_exoplayer_view"
-        app:layout_constraintVertical_bias="0.242" />
 
     <Button
         android:id="@+id/recipe_step_detail_fragment_previous_button"
@@ -47,8 +35,7 @@
         app:layout_constraintEnd_toStartOf="@+id/recipe_step_detail_fragment_next_button"
         app:layout_constraintHorizontal_bias="0.357"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recipe_step_detail_fragment_recycler_view"
-        app:layout_constraintVertical_bias="0.325" />
+        app:layout_constraintTop_toBottomOf="@+id/recipe_step_detail_fragment_description_text_view" />
 
     <Button
         android:id="@+id/recipe_step_detail_fragment_next_button"
@@ -56,10 +43,26 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="52dp"
+        android:layout_marginTop="8dp"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recipe_step_detail_fragment_recycler_view"
-        app:layout_constraintVertical_bias="0.431" />
+        app:layout_constraintTop_toBottomOf="@+id/recipe_step_detail_fragment_description_text_view" />
+
+    <TextView
+        android:id="@+id/recipe_step_detail_fragment_description_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipe_step_detail_fragment_exoplayer_view"
+        app:layout_constraintVertical_bias="0.153" />
 
 </android.support.constraint.ConstraintLayout>
