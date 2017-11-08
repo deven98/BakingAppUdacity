@@ -5,13 +5,14 @@ import android.annotation.SuppressLint;
 import android.content.AsyncTaskLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import devapp.com.bakingappudacity.utils.NetworkUtils;
 
-public class RecipeDetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Void>{
+public class RecipeDetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Void>,RecipeDetailFragment.ItemClickListener{
 
     int positionOfRecipe;
 
@@ -66,4 +67,10 @@ public class RecipeDetailActivity extends AppCompatActivity implements LoaderMan
 
     }
 
+    @Override
+    public void onItemClick(int position) {
+
+
+
+    }
 }

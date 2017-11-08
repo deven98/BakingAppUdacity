@@ -1,5 +1,6 @@
 package devapp.com.bakingappudacity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,12 +16,22 @@ import devapp.com.bakingappudacity.utils.NetworkUtils;
 public class RecipeDetailFragment extends Fragment {
 
     public RecipeDetailFragment(){
-
     }
 
     public static RecipeDetailAdapter recipeDetailAdapter;
     RecyclerView recipeDetailRecyclerView;
     LinearLayoutManager linearLayoutManager;
+    ItemClickListener itemClickListener;
+
+    public interface ItemClickListener{
+        public void onItemClick(int position);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        itemClickListener = (ItemClickListener) context;
+    }
 
     @Nullable
     @Override
@@ -34,7 +45,8 @@ public class RecipeDetailFragment extends Fragment {
 
                 NetworkUtils.STEP_CHOSEN = position;
 
-                //if layout is mobile phone view
+                //itemClickListener.onItemClick(position);
+
                 Intent in = new Intent(getContext(),RecipeStepDetailActivity.class);
                 in.putExtra("position",position);
                 startActivity(in);
@@ -52,4 +64,5 @@ public class RecipeDetailFragment extends Fragment {
         return v;
 
     }
+
 }

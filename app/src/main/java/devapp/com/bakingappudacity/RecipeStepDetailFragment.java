@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -31,9 +32,9 @@ public class RecipeStepDetailFragment extends Fragment {
     Button prevButton;
     SimpleExoPlayer exoPlayer;
     TextView descriptionTextView;
-    long position;
 
     public boolean isHorizontal = false;
+    public long playbackTime = 0;
 
     void initialize(View v){
 
@@ -73,8 +74,13 @@ public class RecipeStepDetailFragment extends Fragment {
         if(isHorizontal)
         descriptionTextView.setText(NetworkUtils.STEP_DESCRIPTION.get(NetworkUtils.STEP_CHOSEN));
 
-        exoPlayer.seekTo(position);
+        Toast.makeText(getContext(), String.valueOf(playbackTime), Toast.LENGTH_SHORT).show();
 
+        try {
+            exoPlayer.seekTo(playbackTime);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     void setOnClickListeners(){
@@ -86,6 +92,8 @@ public class RecipeStepDetailFragment extends Fragment {
                 if(NetworkUtils.STEP_CHOSEN < NetworkUtils.STEP_DESCRIPTION.size() - 1){
 
                     NetworkUtils.STEP_CHOSEN += 1;
+
+                    playbackTime = 0;
 
                     releasePlayer();
                     prepareExoPlayer();
@@ -101,6 +109,8 @@ public class RecipeStepDetailFragment extends Fragment {
                 if(NetworkUtils.STEP_CHOSEN != 0){
 
                     NetworkUtils.STEP_CHOSEN -= 1;
+
+                    playbackTime = 0;
 
                     releasePlayer();
                     prepareExoPlayer();
@@ -120,6 +130,11 @@ public class RecipeStepDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        try {
+            playbackTime = Long.parseLong(savedInstanceState.getString("playback"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         View v = inflater.inflate(R.layout.recipe_step_detail_fragment,container,false);
 
         initialize(v);
@@ -154,5 +169,8 @@ public class RecipeStepDetailFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        Toast.makeText(getContext(), String.valueOf(exoPlayer.getCurrentPosition()), Toast.LENGTH_SHORT).show();
+        outState.putString("playback",String.valueOf(exoPlayer.getCurrentPosition()));
     }
+
 }
