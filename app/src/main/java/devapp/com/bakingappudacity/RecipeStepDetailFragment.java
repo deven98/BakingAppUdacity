@@ -1,6 +1,5 @@
 package devapp.com.bakingappudacity;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -32,20 +31,29 @@ public class RecipeStepDetailFragment extends Fragment {
     Button prevButton;
     SimpleExoPlayer exoPlayer;
     TextView descriptionTextView;
+    long position;
+
+    public boolean isHorizontal = false;
 
     void initialize(View v){
 
-        descriptionTextView = (TextView) v.findViewById(R.id.recipe_step_detail_fragment_description_text_view);
+        isHorizontal = false;
+
         simpleExoPlayerView = (SimpleExoPlayerView) v.findViewById(R.id.recipe_step_detail_fragment_exoplayer_view);
-        nextButton = (Button) v.findViewById(R.id.recipe_step_detail_fragment_next_button);
-        prevButton = (Button) v.findViewById(R.id.recipe_step_detail_fragment_previous_button);
+
+        if(v.findViewById(R.id.recipe_step_detail_fragment_description_text_view) != null) {
+
+            isHorizontal = true;
+
+            descriptionTextView = (TextView) v.findViewById(R.id.recipe_step_detail_fragment_description_text_view);
+            nextButton = (Button) v.findViewById(R.id.recipe_step_detail_fragment_next_button);
+            prevButton = (Button) v.findViewById(R.id.recipe_step_detail_fragment_previous_button);
+
+
+            setOnClickListeners();
+        }
 
         prepareExoPlayer();
-
-        setOnClickListeners();
-
-
-
     }
 
     void prepareExoPlayer(){
@@ -62,7 +70,10 @@ public class RecipeStepDetailFragment extends Fragment {
 
         exoPlayer.setPlayWhenReady(true);
 
+        if(isHorizontal)
         descriptionTextView.setText(NetworkUtils.STEP_DESCRIPTION.get(NetworkUtils.STEP_CHOSEN));
+
+        exoPlayer.seekTo(position);
 
     }
 
@@ -140,4 +151,8 @@ public class RecipeStepDetailFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 }

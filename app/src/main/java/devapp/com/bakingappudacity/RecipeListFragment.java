@@ -12,9 +12,6 @@ import android.view.ViewGroup;
 
 import devapp.com.bakingappudacity.utils.NetworkUtils;
 
-/**
- * Created by HP on 25-10-2017.
- */
 
 public class RecipeListFragment extends Fragment {
 
