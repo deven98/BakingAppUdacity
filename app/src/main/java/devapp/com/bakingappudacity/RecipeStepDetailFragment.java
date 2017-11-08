@@ -54,7 +54,11 @@ public class RecipeStepDetailFragment extends Fragment {
             setOnClickListeners();
         }
 
-        prepareExoPlayer();
+        try {
+            prepareExoPlayer();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     void prepareExoPlayer(){
@@ -76,11 +80,8 @@ public class RecipeStepDetailFragment extends Fragment {
 
         Toast.makeText(getContext(), String.valueOf(playbackTime), Toast.LENGTH_SHORT).show();
 
-        try {
-            exoPlayer.seekTo(playbackTime);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        exoPlayer.seekTo(playbackTime);
+
     }
 
     void setOnClickListeners(){
