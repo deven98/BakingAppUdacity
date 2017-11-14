@@ -9,6 +9,12 @@ import android.view.WindowManager;
 public class RecipeStepDetailActivity extends AppCompatActivity {
 
     @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -24,8 +30,14 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+        }else {
+
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         }
 
         setContentView(R.layout.activity_recipe_step_detail);
+
+
     }
 }

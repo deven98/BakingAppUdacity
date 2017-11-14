@@ -20,10 +20,24 @@ public class RecipeDetailActivity extends AppCompatActivity implements LoaderMan
 
     RecipeStepDetailFragment detailActivityFragment;
 
+    public static boolean isMobile = true;
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_detail);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if(findViewById(R.id.recipe_step_detail_fragment) != null){
+            isMobile = false;
+        }
 
         Intent in = getIntent();
 
@@ -82,7 +96,9 @@ public class RecipeDetailActivity extends AppCompatActivity implements LoaderMan
     @Override
     public void sendData(int position) {
 
+        if(detailActivityFragment != null)
         detailActivityFragment.onListFragmentClicked(position);
 
     }
+
 }

@@ -51,14 +51,15 @@ public class RecipeDetailFragment extends Fragment {
                 NetworkUtils.STEP_CHOSEN = position;
 
                 // Starts only when app runs on a mobile phone.
-                if(v.findViewById(R.id.recipe_step_detail_fragment) != null){
+                if(RecipeDetailActivity.isMobile){
                     Intent in = new Intent(getContext(),RecipeStepDetailActivity.class);
                     in.putExtra("position",position);
                     startActivity(in);}
+
+                //Starts when app is running in tablet mode.
                 else{
                     fragmentCommunicator.sendData(position);
                 }
-
 
             }
         });
