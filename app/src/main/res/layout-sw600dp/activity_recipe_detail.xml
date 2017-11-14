@@ -19,11 +19,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.12"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sw600_recipe_step_detail_fragment"
+        app:layout_constraintTop_toBottomOf="@+id/recipe_step_detail_fragment"
         app:layout_constraintVertical_bias="1.0" />
 
     <fragment
-        android:id="@+id/sw600_recipe_step_detail_fragment"
+        android:id="@+id/recipe_step_detail_fragment"
         android:name="devapp.com.bakingappudacity.RecipeStepDetailFragment"
         android:layout_width="0dp"
         android:layout_height="595dp"

@@ -170,8 +170,23 @@ public class RecipeStepDetailFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Toast.makeText(getContext(), String.valueOf(exoPlayer.getCurrentPosition()), Toast.LENGTH_SHORT).show();
-        outState.putString("playback",String.valueOf(exoPlayer.getCurrentPosition()));
+        try {
+            Toast.makeText(getContext(), String.valueOf(exoPlayer.getCurrentPosition()), Toast.LENGTH_SHORT).show();
+            outState.putString("playback", String.valueOf(exoPlayer.getCurrentPosition()));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void onListFragmentClicked(int position){
+
+        NetworkUtils.STEP_CHOSEN = position;
+
+        playbackTime = 0;
+
+        releasePlayer();
+        prepareExoPlayer();
+
     }
 
 }

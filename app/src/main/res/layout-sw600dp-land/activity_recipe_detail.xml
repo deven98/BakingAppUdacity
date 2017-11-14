@@ -23,7 +23,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <fragment
-        android:id="@+id/sw600_recipe_step_detail_fragment"
+        android:id="@+id/recipe_step_detail_fragment"
         android:name="devapp.com.bakingappudacity.RecipeStepDetailFragment"
         android:layout_width="597dp"
         android:layout_height="match_parent"

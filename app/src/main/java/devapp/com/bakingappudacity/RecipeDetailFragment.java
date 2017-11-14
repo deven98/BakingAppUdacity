@@ -15,6 +15,8 @@ import devapp.com.bakingappudacity.utils.NetworkUtils;
 
 public class RecipeDetailFragment extends Fragment {
 
+    public FragmentCommunicator fragmentCommunicator;
+
     public RecipeDetailFragment(){
     }
 
@@ -31,13 +33,16 @@ public class RecipeDetailFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         itemClickListener = (ItemClickListener) context;
+
+        fragmentCommunicator = (FragmentCommunicator) getActivity();
+
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.recipe_detail_fragment,container,false);
+        final View v = inflater.inflate(R.layout.recipe_detail_fragment,container,false);
 
         recipeDetailAdapter = new RecipeDetailAdapter(getContext(), new RecipeDetailAdapter.ItemClickListener() {
             @Override
@@ -45,11 +50,16 @@ public class RecipeDetailFragment extends Fragment {
 
                 NetworkUtils.STEP_CHOSEN = position;
 
-                //itemClickListener.onItemClick(position);
+                // Starts only when app runs on a mobile phone.
+                if(v.findViewById(R.id.recipe_step_detail_fragment) != null){
+                    Intent in = new Intent(getContext(),RecipeStepDetailActivity.class);
+                    in.putExtra("position",position);
+                    startActivity(in);}
+                else{
+                    fragmentCommunicator.sendData(position);
+                }
 
-                Intent in = new Intent(getContext(),RecipeStepDetailActivity.class);
-                in.putExtra("position",position);
-                startActivity(in);
+
             }
         });
 

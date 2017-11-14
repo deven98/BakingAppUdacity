@@ -12,11 +12,13 @@ import android.os.Bundle;
 
 import devapp.com.bakingappudacity.utils.NetworkUtils;
 
-public class RecipeDetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Void>,RecipeDetailFragment.ItemClickListener{
+public class RecipeDetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Void>, RecipeDetailFragment.ItemClickListener, FragmentCommunicator{
 
     int positionOfRecipe;
 
     public static final int RECIPE_DETAIL_LOADER_ID = 102;
+
+    RecipeStepDetailFragment detailActivityFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,8 @@ public class RecipeDetailActivity extends AppCompatActivity implements LoaderMan
         }
 
         getSupportLoaderManager().initLoader(RECIPE_DETAIL_LOADER_ID,null,this);
+
+        detailActivityFragment = (RecipeStepDetailFragment) getSupportFragmentManager().findFragmentById(R.id.recipe_step_detail_fragment);
 
     }
 
@@ -71,6 +75,14 @@ public class RecipeDetailActivity extends AppCompatActivity implements LoaderMan
     public void onItemClick(int position) {
 
 
+
+    }
+
+    //Communicates with other fragment
+    @Override
+    public void sendData(int position) {
+
+        detailActivityFragment.onListFragmentClicked(position);
 
     }
 }
