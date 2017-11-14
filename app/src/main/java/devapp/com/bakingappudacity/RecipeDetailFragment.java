@@ -65,6 +65,8 @@ public class RecipeDetailFragment extends Fragment {
 
         recipeDetailRecyclerView = (RecyclerView) v.findViewById(R.id.recipe_detail_fragment_recycler_view);
 
+        recipeDetailRecyclerView.setNestedScrollingEnabled(false);
+
         linearLayoutManager = new LinearLayoutManager(getContext());
 
         recipeDetailRecyclerView.setAdapter(recipeDetailAdapter);
