@@ -1,10 +1,12 @@
 package devapp.com.bakingappudacity;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.widget.RemoteViews;
 
 import devapp.com.bakingappudacity.utils.WidgetAdapterService;
@@ -24,6 +26,15 @@ public class NewAppWidget extends AppWidgetProvider {
         Intent intent = new Intent(context, WidgetAdapterService.class);
 
         views.setRemoteAdapter(R.id.widget_list_view,intent);
+
+        Intent activityIntent = new Intent(context, RecipeDetailActivity.class);
+        // Set the action for the intent.
+        // When the user touches a particular view.
+        activityIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+        activityIntent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, appWidgetId,
+                activityIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        views.setPendingIntentTemplate(R.id.widget_list_view, pendingIntent);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
@@ -73,5 +84,19 @@ public class NewAppWidget extends AppWidgetProvider {
     public void onDisabled(Context context) {
         // Enter relevant functionality for when the last widget is disabled
     }
+
+
+    private static void bindIntentTemplate(Context context, int widgetId, RemoteViews remoteViews) {
+
+        Intent intent = new Intent(context, RecipeDetailActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
+        intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
+        PendingIntent template = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        remoteViews.setPendingIntentTemplate(R.id.widget_list_view, template);
+    }
+
+
 }
 

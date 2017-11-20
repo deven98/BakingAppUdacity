@@ -2,6 +2,7 @@ package devapp.com.bakingappudacity.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 import android.widget.Toast;
@@ -51,6 +52,14 @@ class WidgetAdapter implements RemoteViewsService.RemoteViewsFactory {
 
         RemoteViews item = new RemoteViews(context.getPackageName(), R.layout.widget_list_item);
         item.setTextViewText(R.id.widget_list_view_item_text_view,NetworkUtils.RECIPE_NAMES.get(position));
+
+        Bundle extras = new Bundle();
+        extras.putInt("position", position);
+        Intent fillInIntent = new Intent();
+        fillInIntent.putExtras(extras);
+        // Make it possible to distinguish the individual on-click
+        // action of a given item
+        item.setOnClickFillInIntent(R.id.widget_item_frame, fillInIntent);
 
         return item;
     }
