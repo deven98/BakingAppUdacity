@@ -83,4 +83,5 @@ class WidgetAdapter implements RemoteViewsService.RemoteViewsFactory {
     public boolean hasStableIds() {
         return true;
     }
+
 }
