@@ -7,6 +7,7 @@ import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import devapp.com.bakingappudacity.utils.NetworkUtils;
 
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onLoadFinished(Loader<Void> loader, Void data) {
 
         RecipeListFragment.recipeListAdapter.notifyDataSetChanged();
+        Toast.makeText(this, String.valueOf(NetworkUtils.RECIPE_IMAGE_LINKS.size()), Toast.LENGTH_SHORT).show();
 
     }
 

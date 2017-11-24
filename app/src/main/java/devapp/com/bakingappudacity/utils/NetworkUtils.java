@@ -17,6 +17,7 @@ public class NetworkUtils {
     public static String JSON_URL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
 
     public static ArrayList<String> RECIPE_NAMES = new ArrayList<>();
+    public static ArrayList<String> RECIPE_IMAGE_LINKS = new ArrayList<>();
 
     public static ArrayList<String> INGREDIENTS_QUANTITY = new ArrayList<>();
     public static ArrayList<String> INGREDIENTS_MEASURE =  new ArrayList<>();
@@ -34,6 +35,7 @@ public class NetworkUtils {
     public static void getRecipesNames(){
 
         RECIPE_NAMES.clear();
+        RECIPE_IMAGE_LINKS.clear();
 
         try {
 
@@ -44,6 +46,7 @@ public class NetworkUtils {
             for(int i=0; i<resultArray.length(); i++){
 
                 RECIPE_NAMES.add(resultArray.getJSONObject(i).getString("name"));
+                RECIPE_IMAGE_LINKS.add(resultArray.getJSONObject(i).getString("image"));
 
             }
 

@@ -1,11 +1,15 @@
 package devapp.com.bakingappudacity;
 
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import devapp.com.bakingappudacity.utils.NetworkUtils;
 
@@ -47,12 +51,15 @@ public class RecipeDetailAdapter extends RecyclerView.Adapter<RecipeDetailAdapte
     public class RecipeDetailHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView shortDescription;
+        ImageView thumbnail;
 
         public RecipeDetailHolder(View itemView) {
 
             super(itemView);
 
             shortDescription = (TextView) itemView.findViewById(R.id.recipe_detail_item_short_description_text_view);
+
+            thumbnail = (ImageView) itemView.findViewById(R.id.recipe_detail_list_item_image_view);
 
             itemView.setOnClickListener(this);
         }
@@ -62,6 +69,12 @@ public class RecipeDetailAdapter extends RecyclerView.Adapter<RecipeDetailAdapte
             String shortDescriptionText = "Step: " + String.valueOf(position+1) + "\n" + NetworkUtils.STEP_SHORT_DESCRIPTION.get(position);
 
             shortDescription.setText(shortDescriptionText);
+
+            try {
+                Picasso.with(mContext).load(NetworkUtils.STEP_THUMBNAIL_URL.get(position)).error(R.drawable.baking).into(thumbnail);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
 
         }
 

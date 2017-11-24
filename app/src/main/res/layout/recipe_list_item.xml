@@ -8,6 +8,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:translationZ="5dp">
 
+    <ImageView
+        android:id="@+id/recipe_list_item_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/baking"
+        android:scaleType="centerCrop" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:alpha="0.9">
+
         <TextView
             android:textColor="@color/colorPrimary"
             android:layout_marginTop="15dp"
@@ -18,5 +31,7 @@
             tools:text="Example Text"
             android:gravity="center"
             android:textSize="25sp"/>
+
+    </android.support.v7.widget.CardView>
 
     </android.support.v7.widget.CardView>

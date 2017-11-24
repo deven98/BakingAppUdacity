@@ -19,6 +19,17 @@
         app:layout_constraintTop_toTopOf="parent"
         android:translationZ="5dp">
 
+        <ImageView
+            android:id="@+id/recipe_detail_list_item_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@drawable/baking" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0.9">
+
         <TextView
             android:id="@+id/recipe_detail_item_short_description_text_view"
             android:layout_width="match_parent"
@@ -32,6 +43,8 @@
             android:textSize="20sp"
             tools:fontFamily="sans-serif"
             tools:text="Step title" />
+
+        </android.support.v7.widget.CardView>
 
     </android.support.v7.widget.CardView>
 

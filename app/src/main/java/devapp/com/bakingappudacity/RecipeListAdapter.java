@@ -5,7 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import devapp.com.bakingappudacity.utils.NetworkUtils;
 
@@ -52,12 +56,14 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     public class RecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView recipeName;
+        ImageView thumbnail;
 
         public RecipeViewHolder(View itemView) {
 
             super(itemView);
 
             recipeName = (TextView) itemView.findViewById(R.id.recipe_list_item_text_view);
+            thumbnail = (ImageView) itemView.findViewById(R.id.recipe_list_item_image_view);
 
             itemView.setOnClickListener(this);
 
@@ -66,7 +72,11 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         void bind(int position){
 
             recipeName.setText(NetworkUtils.RECIPE_NAMES.get(position));
-
+            try {
+                Picasso.with(mContext).load(NetworkUtils.RECIPE_IMAGE_LINKS.get(position)).error(R.drawable.baking).into(thumbnail);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
 
         @Override
